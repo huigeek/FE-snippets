@@ -57,3 +57,34 @@ function throttle2 (fn = function(){}, limit = 1000) {
     }
   }
 }
+
+/**
+ * // 设一个是否延迟执行的开关。这里会立即执行一次，执行后的limit时间内不会再执行，直到limit时间后
+ * @param {Function} fn 
+ * @param {Number} limit 
+ * @return {Function}
+ */
+function throttle3 (fn = function(){}, limit = 1000) {
+  let isDelay = false
+  return function () {
+    if (!isDelay) {
+      isDelay = true
+      fn()
+      setTimeout(() => {
+        isDelay = false
+      }, limit)
+    }
+  }
+}
+
+// function xx () {
+//   console.log('--throttle--')
+// }
+
+// let t = throttle1(xx, 3000)
+
+// setInterval(() => {
+//   // xx()
+//   t()
+// }, 500)
+
