@@ -1,3 +1,4 @@
+// implement setInterval using setTimeout
 class Interval {
   constructor () {}
   interval(fn, ms) {
