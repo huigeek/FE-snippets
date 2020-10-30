@@ -24,8 +24,21 @@ class Sort {
       i++
     }
   }
+  // 选择排序
+  selectionSort (arr) {
+    let i = 0, len = arr.length
+    while (i < len) {
+      let minIndex = i, j = i
+      while (j < len) {
+        (arr[minIndex] > arr[j]) && (minIndex = j)
+        j++
+      }
+      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+      i++
+    }
+  }
 }
 
 let arr = [53, 1, 35, 22, 35, 32, 13, 53, 45, 26, 8]
-Sort.prototype.babbleSort(arr)
+Sort.prototype.selectionSort(arr)
 console.log(arr)
