@@ -41,6 +41,25 @@ class Sort {
   }
 }
 
-let arr = [53, 1, 35, 22, 35, 32, 13, 53, 45, 26, 8]
-Sort.prototype.selectionSort(arr)
-console.log(arr)
+// let arr = [53, 1, 35, 22, 35, 32, 13, 53, 45, 26, 8]
+// Sort.prototype.selectionSort(arr)
+// console.log(arr)
+
+function mergeSort(arr) {
+  let len = arr.length
+  if (len === 1) return arr
+  let mid = Math.floor(len/2), left = arr.slice(0,mid), right=arr.slice(mid,len)
+  return merge(mergeSort(left), mergeSort(right))
+}
+
+function merge (left, right) {
+  let result = [], il = 0, ir = 0;
+  while(il < left.length && ir < right.length){
+    left[il] < right[ir] ? result.push(left[il++]) : result.push(right[ir++])
+  }
+  result.push(...left.slice(il), ...right.slice(ir))
+  return result
+}
+
+let temp = [13,22,1,3,53,1,53,53,5,5,6,63,23]
+console.log(mergeSort(temp))
