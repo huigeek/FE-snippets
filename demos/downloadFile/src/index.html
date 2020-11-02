@@ -1,0 +1,29 @@
+<button class="btn">点击下载txt文件</button>
+<script>
+const btn = document.querySelector('.btn')
+
+btn.addEventListener('click', download)
+
+function download () {
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', '/downloadFile.do?name=test', true)
+    xhr.responseType = 'blob'
+    xhr.setRequestHeader('Authorization', 'Basic zgdg=')
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            saveAs(xhr.response, 'abc.txt')
+        }
+    }
+    xhr.send()
+}
+
+function saveAs(data, name) {
+    const urlObj = window.URL || window.webkitURL || window
+    const export_blob = new Blob([data])
+
+    let a = document.createElement('a')
+    a.href = urlObj.createObjectURL(export_blob)
+    a.download = name
+    a.click()
+}
+</script>
