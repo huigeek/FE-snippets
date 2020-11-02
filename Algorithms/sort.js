@@ -1,5 +1,5 @@
 class Sort {
-  babbleSort (arr) {
+  bubbleSort (arr) {
     let i = 0, len = arr.length
     while (i < len) {
       // arr[i]
@@ -13,7 +13,7 @@ class Sort {
     }
   }
   // 插入排序
-  insertSort (arr) {
+  insertionSort (arr) {
     let i = 1, len = arr.length
     while (i < len) {
       let j = i
