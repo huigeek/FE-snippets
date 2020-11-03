@@ -4,7 +4,7 @@ const path = require('path')
 const multer = require('multer')
 const upload = multer({dest: 'files'})
 
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000 // process.env 对象里属性变量一般大写
 
 app.use(upload.any())
 app.use(express.static(path.join(__dirname, 'src')))
