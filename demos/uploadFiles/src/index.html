@@ -1,0 +1,23 @@
+<label for="upload">选择图片上传</label>
+
+<input type="file" id="upload" accept="image/png, image/jpeg">
+
+<script>
+  const input = document.querySelector('input')
+  input.addEventListener('change', uploadImage, false)
+
+  function uploadImage (ev) {
+    let formData = new FormData(),
+        xhr = new XMLHttpRequest(),
+        rawFile = ev.target.files[0]
+
+    formData.append('file', rawFile)
+
+    xhr.onreadystatechange = () => {
+      xhr.readyState === 4 && xhr.status === 200 && console.log('上传成功')
+    }
+
+    xhr.open('POST', '/uploadFile.do')
+    xhr.send(formData)
+  }
+</script>
