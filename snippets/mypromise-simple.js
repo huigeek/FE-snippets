@@ -13,10 +13,14 @@ class MyPromise {
     
     const that = this
 
+    // 为了支持异步，使用两个数组，当为PEDNING状态时，将回调订阅到数组中;
+    // 当异步完成后，会调用数组中回调
+
     function resolve(value) {
       if (that.status === PENDING) {
         that.status = RESOLVED
         that.value = value
+        // 发布
         that.resolveCbs.map(cb => cb(that.value))
       }
     }
@@ -25,6 +29,7 @@ class MyPromise {
       if (that.status === PENDING) {
         that.status = REJECTED
         that.value = reason
+        // 发布
         that.rejectCbs.map(cb => cb(that.value))
       }
     }
@@ -36,7 +41,7 @@ class MyPromise {
     onRejected = typeof onRejected === 'function' ? onRejected : r => {throw r}
 
     if (this.status === PENDING) {
-      // do sth
+      // 订阅
       this.resolveCbs.push(onFullfiled)
       this.rejectCbs.push(onRejected)
     }
