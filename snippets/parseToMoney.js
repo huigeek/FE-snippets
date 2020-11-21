@@ -13,4 +13,11 @@ function parseToMoney (num) {
   })
   return end ? `${newArr.join('')}.${end}` : newArr.join('')
 }
-// console.log(parseToMoney(1087654.321))
+
+function parseToMoney2 (num) {
+  let [integer, decimal] = String.prototype.split.call(num, '.')
+  integer = integer.replace(/\d(?=(\d{3})+$)/g, '$&,')
+  return decimal ? integer + '.' + decimal : integer
+}
+
+console.log(parseToMoney2(1087654))
