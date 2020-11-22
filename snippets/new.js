@@ -19,3 +19,10 @@ function _new (fn, ...params) {
 
 // console.log(p1.__proto__)
 // console.log(p2.__proto__)
+
+function _new (func) {
+  let obj = Object.create(null)
+  (func.prototype !== null) && (obj.__proto__ = func.prototype)
+  const o = func.apply(obj, Array.prototype.slice.call(arguments, 1))
+  return o instanceof Object || o instanceof Function ? o : obj
+}
