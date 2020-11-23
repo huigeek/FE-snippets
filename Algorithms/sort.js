@@ -63,3 +63,39 @@ function merge (left, right) {
 
 let temp = [13,22,1,3,53,1,53,53,5,5,6,63,23]
 console.log(mergeSort(temp))
+
+
+function mergeSort2(arr) {
+  merge2(arr, 0, arr.length - 1)
+  return arr
+}
+
+function merge2(arr, left, right) {
+  if (left === right) return
+  // 取中间值 num / 2 等同于 num >> 1
+  let mid = parseInt(left + ((right - left) >> 1))
+  merge2(arr, left, mid)
+  merge2(arr, mid + 1, right)
+
+  let help = []
+  let i = 0
+  let p1 = left // left index
+  let p2 = mid + 1 // right index
+
+  while (p1 <= mid && p2 <= right) {
+    help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++] 
+  }
+  while (p1 <= mid) {
+    help[i++] = arr[p1++]
+  }
+  while (p2 <= right) {
+    help[i++] = arr[p2++]
+  }
+
+  help.map((item, idx) => (arr[left + idx] = item))
+  return arr
+}
+
+let arr = [3, 515, 1, 35, 66, 43]
+mergeSort2(arr)
+console.log(arr)
