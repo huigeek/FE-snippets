@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script>
+    const el = document.querySelector('.box')
+    let left = 0
+    const move = function () {
+      console.log('---')
+      left += 10
+      el.style.marginLeft = left + 'px'
+      left > 500 ? cancelAnimationFrame(move) : requestAnimationFrame(move)
+    }
+    requestAnimationFrame(move)
+  </script>
+</body>
+</html>
