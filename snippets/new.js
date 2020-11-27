@@ -26,3 +26,10 @@ function _new (func) {
   const o = func.apply(obj, Array.prototype.slice.call(arguments, 1))
   return o instanceof Object || o instanceof Function ? o : obj
 }
+
+function _new () {
+  const cstor = [].shift.call(arguments)
+  const obj = Object.create(cstor.prototype)
+  const result = cstor.apply(obj, arguments)
+  return typeof result === 'object' ? result : obj
+}
