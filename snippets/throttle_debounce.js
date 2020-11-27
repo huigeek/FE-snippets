@@ -18,6 +18,16 @@ function debounce1 (fn = function(){} , wait = 1000) {
   }
 }
 
+function debounce2 (fn = function(){}, wait = 1000) {
+  let timer
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, wait)
+  }
+}
+
 /**
  * throttle: 在短时间内，只执行一次。例如在搜索框输入时，每2秒匹配一次
  * // 使用定时器
@@ -74,6 +84,19 @@ function throttle3 (fn = function(){}, limit = 1000) {
         isDelay = false
       }, limit)
     }
+  }
+}
+
+// 节流函数
+const throttle4 = function (fn = function(){}, limit = 1000) {
+  let isDelay = false
+  return (...args) => {
+    if (isDelay) return
+    isDelay = true
+    setTimeout(() => {
+      fn.apply(this, args)
+      isDelay = false
+    }, limit)  
   }
 }
 
