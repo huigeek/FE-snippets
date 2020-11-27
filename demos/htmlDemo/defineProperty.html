@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <div></div>
+  <script>
+    let input = document.querySelector('input')
+    let el = document.querySelector('div')
+
+    // input 输入值，div里内容改变
+
+    // 事件绑定
+    // input 值改变，触发数据改变，数据改变触发视图中 div 改变
+
+    // 正常给 Object.defineProperty(obj), 实现对 obj 的 getter 和 setter 的监听
+    // 虚拟dom，vnode 是一个 js 对象
+    let obj = {
+      value: 3
+    }
+
+    let v = obj.value
+    Object.defineProperty(obj, 'value', {
+      get: function () {
+        input.value = v
+        return v
+      },
+      set: function (newVal, v) {
+        input.value = newVal
+        el.innerHTML = newVal
+      }
+    })
+
+    input.addEventListener('input', function(e){
+      obj.value = e.target.value
+    })
+
+  </script>
+</body>
+</html>
