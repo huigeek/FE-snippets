@@ -1,22 +1,18 @@
-// 现在有一个函数A和函数B，请你实现B继承A
-
-// 原型继承
-function A(){}
-function B(){}
-B.prototype = new A()
-B.prototype.constructor = B
-
-
-// 构造函数继承
-function A(){}
-function B(){
-  A.call(this)
+function Person(name){
+  this.name = name
 }
 
-// 组合继承
-function A(){}
-function B(){
-  A.call(this)
+Person.prototype.say = function(){
+  // do sth
 }
 
-B.prototype = new A()
+function Teacher(name, age){
+  Person.call(this)
+  this.name = name
+  this.age = age
+}
+
+Teacher.prototype = Object.create(Person.prototype)
+Teacher.prototype.constructor = Teacher
+
+
