@@ -30,10 +30,16 @@ function render3(template, data) {
   return template.replace(new RegExp('{{(.*?)}}', 'g'), (match, key) => data[key.trim()])
 }
 
-let template = '我是{{name}}，年龄{{age}}，性别{{sex}}';
-let data = {
-  name: '姓名',
-  age: 18
+function render4(template, data) {
+  const reg = /\{\{(\w+)\}\}/g
+  return template.replace(reg, (v1, v2) => data[v2])
 }
-console.log(render3(template, data)); // 我是姓名，年龄18，性别undefined
+
+// let template = '我是{{name}}，年龄{{age}}，性别{{sex}}';
+// let data = {
+//   name: '姓名',
+//   age: 18
+// }
+// console.log(render3(template, data)); // 我是姓名，年龄18，性别undefined
+// console.log(render4(template, data)); // 我是姓名，年龄18，性别undefined
 
