@@ -20,4 +20,14 @@ function parseToMoney2 (num) {
   return decimal ? integer + '.' + decimal : integer
 }
 
+function parseToMoney3 (num) {
+  let [integer, decimal] = String.prototype.split.call(num, '.')
+  let newInteger = '', len = integer.length
+  for (let i in integer) {
+    newInteger += ((len - +i) % 3 === 1) ? `${integer[i]},` : integer[i]
+  }
+  return `${newInteger.slice(0, -1)}${decimal ? `.${decimal}` : ''}`
+}
+
 console.log(parseToMoney2(1087654))
+console.log(parseToMoney3(1087654))
