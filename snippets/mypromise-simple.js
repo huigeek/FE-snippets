@@ -40,22 +40,28 @@ class MyPromise {
     onFullfiled = typeof onFullfiled === 'function' ? onFullfiled : v => v
     onRejected = typeof onRejected === 'function' ? onRejected : r => {throw r}
 
+    const executor = function(resolve, reject) {
+      setTimeout(() => {
+        try {
+          const value = this.status === RESOLVED ? onFullfiled(this.value) : onRejected(this.value)
+          resolve(value)
+        }
+        catch (e){
+          reject(e)
+        }
+      })
+    }
+
     if (this.status === PENDING) {
-      // 订阅
-      this.resolveCbs.push(onFullfiled)
-      this.rejectCbs.push(onRejected)
+      return new MyPromise(function (resolve, reject) {
+        // 订阅
+        this.resolveCbs.push(executor.bind(this, resolve, reject))
+        this.rejectCbs.push(executor.bind(this, resolve, reject))
+      }.bind(this))
     }
-
-    if (this.status === RESOLVED) {
-      onFullfiled(this.value)
+    else {
+      return new MyPromise(executor.bind(this))
     }
-
-    if (this.status === REJECTED) {
-      onRejected(this.value)
-    }
-
-    // return promise
-
   }
 }
 
