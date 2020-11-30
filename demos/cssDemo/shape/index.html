@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: black;
+    }
+    .box {
+      position: relative;
+      margin: 60px;
+      width: 530px;
+      height: 300px;
+      background: #001737;
+      border: 1px solid #01429c;
+    }
+    .corner {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+    }
+    .corner > span {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid #23a0fd;
+    }
+    .corner > span:first-child {
+      top: 0;
+      left: 0;
+      border: none;
+    }
+    .corner > span:nth-child(2) {
+      top: 0;
+      right: 0;
+      border-bottom: none;
+      border-left: none;
+    }
+    .corner > span:nth-child(3) {
+      bottom: 0;
+      right: 0;
+      border-top: none;
+      border-left: none;
+    }
+    .corner > span:nth-child(4) {
+      bottom: 0;
+      left: 0;
+      border-top: none;
+      border-right: none;
+    }
+    .header {
+      position: absolute;
+      top: -15px;
+      left: 16px;
+      width: 200px;
+      height: 30px;
+      color: white;
+      background: #1b53aa;
+      box-shadow: 0 2px 6px 2px black;
+      border-top: 1px solid #23a0fd;
+      border-bottom: 1px solid #23a0fd;
+    }
+    .header:before {
+      position: absolute;
+      top: 4px;
+      left: -12px;
+      display: block;
+      content: '';
+      width: 22px;
+      height: 22px;
+      transform: rotate(45deg);
+      background: #1b53aa;
+      box-shadow: 0 4px 2px -1px black;
+      border-left: 1px solid #23a0fd;
+      border-bottom: 1px solid #23a0fd;
+    }
+    .header:after {
+      position: absolute;
+      top: 4px;
+      right: -12px;
+      display: block;
+      content: '';
+      width: 22px;
+      height: 22px;
+      transform: rotate(45deg);
+      background: #1b53aa;
+      box-shadow: 4px 0 2px -1px black;
+      border-right: 1px solid #23a0fd;
+      border-top: 1px solid #23a0fd;
+    }
+    .header-title {
+      position: relative;
+      display: inline-block;
+      margin-left: 10px;
+      height: 100%;
+      line-height: 30px;
+    }
+    .header-tail {
+      position: absolute;
+      top: 0;
+      right: -88px;
+      height: 13px;
+      display: inline-block;
+    }
+    .header-tail > span {
+      display: inline-block;
+      width: 7px;
+      height: 8px;
+      border: 1px solid #23a0fd;
+      vertical-align: top;
+      transform: skew(45deg);
+    }
+    .content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 30px 20px 10px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="corner">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="header">
+      <div class="header-title">title</div>
+      <div class="header-tail">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="content">
+      content
+    </div>
+  </div>  
+</body>
+</html>
