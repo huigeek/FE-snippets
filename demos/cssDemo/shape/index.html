@@ -60,7 +60,7 @@
       height: 30px;
       color: white;
       background: #1b53aa;
-      box-shadow: 0 2px 6px 2px black;
+      box-shadow: 0 2px 6px 2px black, 0 4px 0px 1px #01429c;
       border-top: 1px solid #23a0fd;
       border-bottom: 1px solid #23a0fd;
     }
@@ -74,7 +74,7 @@
       height: 22px;
       transform: rotate(45deg);
       background: #1b53aa;
-      box-shadow: 0 4px 2px -1px black;
+      box-shadow: 0px 4px 2px -1px black, 0px 4px 0px 0px #01429c;
       border-left: 1px solid #23a0fd;
       border-bottom: 1px solid #23a0fd;
     }
@@ -88,16 +88,20 @@
       height: 22px;
       transform: rotate(45deg);
       background: #1b53aa;
-      box-shadow: 4px 0 2px -1px black;
+      box-shadow: 4px 0 2px -1px black, 4px 0 0px 0px #01429c;
       border-right: 1px solid #23a0fd;
       border-top: 1px solid #23a0fd;
     }
     .header-title {
       position: relative;
       display: inline-block;
-      margin-left: 10px;
+      padding-left: 10px;
+      width: 100%;
       height: 100%;
       line-height: 30px;
+      box-sizing: border-box;
+      background: #1b53aa;
+      z-index: 1;
     }
     .header-tail {
       position: absolute;
