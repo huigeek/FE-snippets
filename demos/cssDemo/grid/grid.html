@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid</title>
+  <style>
+    /* 
+      css，自适应布局
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      宽度，最多放几个容器就放几个容器（容器最小为300px）
+      比如宽1000px，放不了四个（300*4=1200），可以放三个（1000/3=333.3）,每个是333.3
+     */
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    div {
+      height: 100px;
+      background: pink;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+    <div>10</div>
+    <div>11</div>
+    <div>12</div>
+    <div>13</div>
+    <div>14</div>
+  </main>
+</body>
+</html>
