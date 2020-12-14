@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 进度条样式 */
+    .progress-box {
+      position: relative;
+      width: 100%;
+      height: 8px;
+      background: #ededed;
+    }
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <script src="./progress.js"></script>
+  <script>
+    // 封装页面顶部进度条
+    window.onload=function(){
+      // 进度条初始化
+      myProgress.init()
+
+      // 异步操作, 服务器端处理了请求，会在5秒后返回数据
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange=function(){
+        console.log('xhr.readyState', xhr.readyState)
+        if (xhr.readyState===4 && (xhr.status === 200 || xhr.status === 204)) {
+          // 进度条调用加载完成方法
+          myProgress.loaded()
+          console.log('====', xhr)
+        }
+      }
+      xhr.open('GET','http://localhost:3000/getInfo', true)
+      xhr.send('xxx')
+    }
+  </script>
+</body>
+</html>
