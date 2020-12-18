@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #progress {
+      --col: orange;
+      --prog: 100px;
+      height: 30px;
+      border-radius: 15px;
+      background-color: pink;
+      background-image: radial-gradient(circle closest-side at var(--prog), var(--col), var(--col) 100%, transparent), linear-gradient(var(--col), var(--col));
+      background-size: 100%, var(--prog);
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+</body>
+</html>
