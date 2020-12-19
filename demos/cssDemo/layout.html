@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    main {
+      border: 2px solid darkred;
+      overflow: hidden;
+    }
+    .column {
+      float: left;
+    }
+
+    .left {
+      width: 120px;
+      height: 70px;
+      background: orchid;
+    }
+    .center {
+      height: 100px;
+      background: mediumvioletred;
+    }
+    .right {
+      width: 180px;
+      height: 80px;
+      background: darkorchid;
+    }
+
+    /* first */
+    .box1 .center {
+      width: calc(100% - 120px - 180px);
+    }
+
+    /* second */
+    .box2 .center {
+      box-sizing: border-box;
+      padding-left: 120px;
+      padding-right: 180px;
+      margin-right: -180px;
+      width: 100%;
+    }
+    .box2 .left {
+      position: relative;
+      margin-right: -100%;
+    }
+
+    /* third */
+    .box3 {
+      padding-left: 120px;
+      padding-right: 180px;
+    }
+    .box3 .center {
+      width: 100%;
+    }
+    .box3 .left {
+      position: relative;
+      margin-left: -100%;
+      right: 120px;
+    }
+    .box3 .right {
+      margin-right: -100%;
+    }
+
+    /* fourth */
+    .box4 #center {
+      width: 100%;
+    }
+    .box4 #center-wrap {
+      margin-left: 120px;
+      margin-right: 180px;
+    }
+    .box4 .left {
+      position: relative;
+      margin-left: -100%;
+    }
+    .box4 .right {
+      margin-left: -180px;
+    }
+
+  </style>
+</head>
+<body>
+  <header></header>
+  <main class="box1">
+    <section class="column left">left</section>
+    <section class="column center">center</section>
+    <section class="column right">right</section>
+  </main>
+
+  <main class="box2">
+    <section class="column left">left</section>
+    <section class="column center">center</section>
+    <section class="column right">right</section>
+  </main>
+
+  <main class="box3">
+    <section class="column center">center</section>
+    <section class="column left">left</section>
+    <section class="column right">right</section>
+  </main>
+
+  <main class="box4">
+    <section id="center" class="column center">
+      <div id="center-wrap">center</div>
+    </section>
+    <section id="left" class="column left">left</section>
+    <section id="right" class="column right">right</section>
+  </main>
+
+  <footer></footer>
+</body>
+</html>

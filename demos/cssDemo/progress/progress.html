@@ -7,7 +7,7 @@
   <style>
     #progress {
       --col: orange;
-      --prog: 100px;
+      --prog: 0;
       height: 30px;
       border-radius: 15px;
       background-color: pink;
@@ -19,5 +19,21 @@
 </head>
 <body>
   <div id="progress"></div>
+  <script>
+    window.onload = function(){
+      let percent = 0
+      const el = document.querySelector('#progress')
+      let timer = setInterval(() => {
+        if (percent < 100) {
+          percent += 3
+          el.style.setProperty('--prog', `${percent}%`)
+        }
+        else {
+          clearInterval(timer)
+          timer = null
+        }
+      }, 300)
+    }
+  </script>
 </body>
 </html>
