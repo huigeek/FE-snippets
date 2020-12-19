@@ -1,0 +1,32 @@
+<div id="point"></div>
+
+<!-- 引入vue cdn -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+<script>
+// Vue.component(id, [definition]) 注册或重用一个全局组件
+
+// 注册一个名称组件，并重用
+
+const MyTitle = Vue.extend({
+  props: {
+    title: String
+  },
+  template: `<h1>{{welcomeTip}}</h1>`,
+  computed: {
+    welcomeTip(){
+      return `欢迎你, ${this.title}`
+    }
+  }
+})
+
+const component1 = Vue.component('cc', MyTitle)
+const component2 = Vue.component('xx', MyTitle)
+
+const Root = Vue.extend({
+  template: `<div><cc title="张三"></cc> <br> <xx title="李四"></xx></div>`,
+  components: {component1, component2}
+})
+
+new Root().$mount('#point')
+</script>

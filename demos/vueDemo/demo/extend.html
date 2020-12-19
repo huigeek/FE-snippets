@@ -1,0 +1,24 @@
+<!-- 挂载点 -->
+<div id="mount-point"></div>
+
+<!-- 引入vue cdn -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script>
+// Vue.extend(options)
+// create a 'subclass' of the base Vue constructor
+
+// 创建MyPro子类
+const MyPro = Vue.extend({
+  template: `<div>name is {{name}}, age is {{age}}</div>`,
+  data(){
+    return {
+      name: 'xx',
+      age: 13
+    }
+  }
+})
+
+// 创建MyPro实例，调用$mount方法，挂载到元素上
+new MyPro().$mount('#mount-point')
+
+</script>
