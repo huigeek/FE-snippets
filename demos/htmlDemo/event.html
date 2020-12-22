@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button>确定</button>
+  </div>
+  <div>
+    <p>激活</p>
+    <p>取消</p>
+    <p>取消</p>
+  </div>
+  <div class="box">
+    <a href="#">xx1</a>
+    <a href="#">xx2</a>
+    <a href="#">xx3</a>
+    <a href="#">xx4</a>
+    <a href="#">xx4</a>
+    <a href="#">xx5</a>
+  </div>
+
+  <script>
+    // 事件
+    // 通用事件绑定函数
+    // function bindEvent(element, type, fn){
+    //   element.addEventListener(type, fn)
+    // }
+
+    function bindEvent(element, type, selector, fn) {
+      if (fn == null) {
+        fn = selector
+        selector = null
+      }
+      element.addEventListener(type, event => {
+        const target = event.target
+        if (selector) {
+          // 代理绑定, element.matches(selectorString)
+          if (target.matches(selector)) {
+            fn.call(target, event)
+          }
+        } else {
+          // 普通绑定
+          fn.call(target, event)
+        }
+      })
+    }
+
+    const btn = document.querySelector('button')
+    bindEvent(btn, 'click', function(e) {
+      alert('clicked')
+    })
+
+    const body = document.body
+    bindEvent(body, 'click', function(e) {
+      alert('取消')
+    })
+
+    const p1 = document.querySelector('p:first-child')
+    bindEvent(p1, 'click', function(e) {
+      e.stopPropagation() // 取消冒泡
+      alert(this.innerHTML)
+    })
+
+    // 事件代理
+    const box = document.querySelector('.box')
+    bindEvent(box, 'click', 'a', function(e) {
+      e.preventDefault()
+      e.stopPropagation()
+      alert(this.innerHTML)
+    })
+
+  </script>
+</body>
+</html>
