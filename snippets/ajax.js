@@ -40,3 +40,35 @@ function ajax ({method, url, data}) {
     xhr.send(sendUrl)
   })
 }
+
+// 实现简易ajax
+// function myAjax(url, successFn) {
+//   const xhr = new XMLHttpRequest()
+//   xhr.onreadystatechange = function(){
+//     if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
+//       successFn(xhr.responseText)
+//     }
+//   }
+//   xhr.open('GET', url, false) // sync
+//   xhr.send(null)
+// }
+
+// function myAjax(url) {
+//   return new Promise((resolve, reject) => {
+//     const xhr = new XMLHttpRequest()
+//     xhr.onreadystatechange = function(){
+//       if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
+//         resolve(xhr.responseText)
+//       }
+//       else {
+//         reject('error')
+//       }
+//     }
+//     xhr.open('GET', url, false)
+//     xhr.send(null)
+//   })
+// }
+
+// myAjax('xx')
+//   .then(res => {})
+//   .catch(err => {})
