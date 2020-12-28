@@ -12,5 +12,10 @@
   "license": "ISC",
   "devDependencies": {
     "express": "^4.17.1"
+  },
+  "dependencies": {
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^6.0.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
