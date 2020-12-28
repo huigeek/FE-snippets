@@ -1,30 +1,23 @@
 // login
 
-window.onload = function(){
+window.onload = () => {
   const formElem = document.querySelector('form')
 
   formElem.addEventListener('submit', (e) => {
     e.preventDefault()
-    let data = new FormData(formElem)
-    console.log('===', data)
-    for (let v of data) {
-      console.log(v)
-    }
+    new FormData(formElem)
   })
 
-  // formElem.addEventListener('formdata', (e) => {
-  //   console.log('formdata fired')
+  formElem.addEventListener('formdata', (e) => {
 
-  //   // Get the form data from the event object
-  //   let data = e.formData
-  //   for (var value of data.values()) {
-  //     console.log(value)
-  //   }
+    // Get the form data from the event object
+    let data = e.formData
 
-  //   // submit the data via XHR
-  //   var request = new XMLHttpRequest()
-  //   request.open("POST", "/formHandler")
-  //   request.send(data)
-  // })
-
+    // submit the data via XHR
+    var request = new XMLHttpRequest()
+    // 这里请求服务端地址是server目录下开的服务器。
+    // 直接请求会有跨域问题，所以server里还需要配合设置cors
+    request.open("POST", "http://localhost:3000/login")
+    request.send(data)
+  })
 }
