@@ -55,3 +55,13 @@ function flatObject (target) {
 }
 
 // console.log(flatObject(obj))
+
+
+// 手写flatten，考虑多层级
+function flatDeep(arr, d = 1){
+  return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [])
+               : arr.slice()
+}
+
+// const arr = [[1,2],2,[4,5,[6,7,[8,9,[10,11]]]]]
+// console.log(flatDeep(arr, Infinity))
