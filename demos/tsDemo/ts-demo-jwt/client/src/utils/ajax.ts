@@ -1,10 +1,12 @@
+import '../interface'
+
 export default function ajax(method, url, data) {
   return new Promise((resolve, reject) => {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function(){
       if (request.readyState === 4) {
         if (request.status === 200) {
-          const res = JSON.parse(request.response)
+          const res: Res = JSON.parse(request.response)
           resolve(res)
         }
         else {
