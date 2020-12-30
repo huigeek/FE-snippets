@@ -15,7 +15,13 @@ window.onload = () => {
     // Get the form data from the event object
     let data = e['formData']
 
-    ajax('POST', 'http://localhost:3000/login', data)
+    const obj = {
+      method: 'POST',
+      url: 'http://localhost:3000/login',
+      data
+    }
+
+    ajax(obj)
       .then((res: Res) => {
         // 取到token后保存到sessionStorage里，之后其他接口就可以带token了
         !window.sessionStorage.getItem('token') && window.sessionStorage.setItem('token', res.token)
