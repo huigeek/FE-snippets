@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid</title>
+  <style>
+    .block1 .container {
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      grid-template-rows: repeat(3, 50px);
+      gap: 10px;
+    }
+    .block1 .box {
+      background: pink;
+    }
+    .block1 .large {
+      grid-row: 1 / 3;
+      grid-column: 1 / 3;
+    }
+
+
+    .block2 .container {
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      grid-template-rows: 50px minmax(150px, auto) 50px;
+      grid-template-areas: 
+      "header header header"
+      "side main main"
+      "footer footer footer";
+      gap: 10px;
+    }
+    .block2 .box {
+      background: yellowgreen;
+    }
+    .block2 .header {
+      grid-area: header;
+      background: goldenrod;
+    }
+    .block2 .side {
+      grid-area: side;
+      background: indianred;
+    }
+    .block2 .main {
+      grid-area: main;
+      background: mediumpurple;
+    }
+    .block2 .footer {
+      grid-area: footer;
+      background: salmon;
+    }
+  </style>
+</head>
+<body>
+  <section class="block1">
+    <div class="container">
+      <div class="box large">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+      <div class="box">6</div>
+    </div>
+  </section>
+
+  <br>
+  <br>
+
+  <section class="block2">
+    <div class="container">
+      <div class="box header">1</div>
+      <div class="box side">2</div>
+      <div class="box main">3</div>
+      <div class="box footer">4</div>
+    </div>
+  </section>
+</body>
+</html>
