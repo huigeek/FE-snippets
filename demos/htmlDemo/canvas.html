@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #canvas {
+      border: 1px solid olive;
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="200" height="200"></canvas>
+  <button>click it, then download the canvas image.</button>
+  <script>
+    const el = document.querySelector('#canvas')
+    const context = el.getContext('2d')
+    context.fillStyle = 'olive'
+    context.fillRect(10, 10, 100, 100)
+
+    const btn = document.querySelector('button')
+    btn.addEventListener('click', downloadCanvas, false)
+    function downloadCanvas(){
+      canvas.toBlob(afterToBlob)
+    }
+    function afterToBlob(blob){
+      const url = URL.createObjectURL(blob)
+      const aEl = document.createElement('a')
+      document.body.appendChild(aEl)
+      aEl.download = 'test'
+      aEl.href = url
+      aEl.click()
+      URL.revokeObjectURL(url)
+    }
+  </script>
+</body>
+</html>
