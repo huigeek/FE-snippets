@@ -1,4 +1,6 @@
-# vue 深入响应式原理
+# vue 深入响应式原理(reactivity in depth)
+
+> 引用的`vue`代码，并不是全的，省略了一些无关的
 
 ## 依赖收集
 
@@ -18,6 +20,7 @@ function defineReactive(obj, key, val, customSetter, shallow){
     get: function reactiveGetter(){
       const value = getter ? getter.call(obj) : val
       if (Dep.target){
+        dep.depend()
         if(childOb){
           childOb.dep.depend()
           if(Array.isArray(value)){
@@ -213,3 +216,57 @@ this.newDepIds = new Set()
 ```
 其中，`this.deps`和`this.newDeps`表示`Watcher`实例持有的`Dep`实例的数组；
 `this.depIds`和`this.newDepIds`代表`this.deps`和`this.newDeps`的id Set.
+
+`Watcher`还定义了一些原型的方法，和依赖收集相关的有`get`、`addDep`和`cleanupDeps`
+
+
+## 过程分析
+
+知道将data变成响应式对象时，`get`里会收集依赖。都有那些时候需要访问数据呢，也就是触发`get`的场景有那些？
+
+`vue`的`mount`过程是通过`mountComponent`(`src/core/instance/lifecycle.js`)函数
+
+```js
+updateComponent = () => {
+  vm._update(vm._render(), hydrating)
+}
+
+new Watcher(vm, updateComponent, noop, {
+  before(){
+    if(vm._isMounted && !vm._isDestroyed){
+      callHook(vm, 'beforeUpdate')
+    }
+  }
+}, true /* isRenderWatcher */)
+```
+
+当我们实例化一个渲染`Watcher`时，进入构造函数运行，执行`this.get()`, 进入`Watcher`的`get`函数
+
+```js
+get(){
+  pushTarget(this)
+  let value
+  const vm = this.vm
+  value = this.getter.call(vm, vm)
+  return value
+}
+```
+
+`pushTarget`的定义在`src/core/observer/dep.js`
+
+```js
+Dep.target = null
+const targetStack = []
+
+function pushTarget(target: ?Watcher){
+  targetStack.push(target)
+  Dep.target = target
+}
+```
+
+把`Dep.target`赋值为当前的渲染`Watcher`，并压栈（为了恢复用）。
+
+`value = this.getter.call(vm, vm)`里`this.getter`对应的是`updateComponent`函数，这实际上就是在执行：`vm._update(vm._render(), hydrating)`
+
+它会先执行`vm._render()`，这个方法会生成渲染VNode，并且在这个过程中会对`vm`上的数据进行访问，这个时候就触发了数据对象的getter.
+
