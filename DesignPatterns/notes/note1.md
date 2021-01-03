@@ -57,3 +57,31 @@ widnow.$ = function(selector){
   return document.querySelector(selector)
 }
 ```
+
+程序执行：顺序、判断、循环 --- 结构化
+面向对象：数据的结构化
+
+对计算机，结构化的才是最简单的
+编程应该 简单&抽象
+
+## UML类图
+
+- Unified Modeling Language 统一建模语言
+- 类图，UML包含很多种图
+- 关系，泛化和关联
+- 演示，代码和类图结合
+
+类名 | 
+--------- | ---------
+\+ public 属性名A: 类型    |
+\# protected 属性名B: 类型 |
+\- private 属性名C: 类型   |
+\+ public 方法名A（参数1，参数2）: 返回值类型 | 
+\# protected 方法名B（参数1，参数2）: 返回值类型 | 
+\- private 方法名C（参数1，参数2）: 返回值类型 | 
+
+## 关系
+
+泛化，表示继承
+关联，表示引用
+
