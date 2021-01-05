@@ -5,8 +5,7 @@
         id="hide"
         type="radio"
         name="status"
-        :checked="status === 0"
-        :value="0"
+        value="0"
         @click="handleClick"
         >
       <label for="hide">隐藏</label>
@@ -15,8 +14,7 @@
         id="show"
         type="radio"
         name="status"
-        :checked="status === 1"
-        :value="1"
+        value="1"
         @click="handleClick"
         >
       <label for="show">显示</label>
@@ -25,8 +23,7 @@
         id="edit"
         type="radio"
         name="status"
-        :checked="status === 2"
-        :value="2"
+        value="2"
         @click="handleClick"
         >
       <label for="edit">编辑</label>
@@ -42,48 +39,31 @@
 import { mapState } from 'vuex'
 export default {
   name: 'HelloWorld',
-  data () {
-    return {
-    }
-  },
-  mounted(){
-    const el = this.$refs.statusWarpper
-    el.addEventListener('click', (e) => {
-      console.log('=====', e, e.target, typeof e.target.value, e.target.value)
-      if (typeof e.target.value === 'string') {
-        // trigger xhr
-        this.settingStatus(+e.target.value)
-      }
-    }, false)
-  },
   computed: mapState({
     status: state => state.status
   }),
+  watch: {
+    status: {
+      handler: function (val) {
+        this.$nextTick(() => {
+          const inputs = document.querySelectorAll('input')
+          inputs[val].checked = true
+        })
+      },
+      immediate: true
+    }
+  },
   methods: {
     settingStatus(value){
-      this.$store.commit('SET_STATUS', value)
+      // 正常这里是个异步，请求后台接口，再去处理
+      setTimeout(() => {
+        this.$store.commit('SET_STATUS', value)
+      }, 0);
     },
     handleClick(e){
       e.preventDefault();
+      this.settingStatus(+e.target.value)
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
