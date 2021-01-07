@@ -6,6 +6,7 @@
 // 注意空字符串可被认为是有效字符串。
 
 function isValid (s) {
+  if (s.length % 2 === 1) return false
   const maps = new Map()
   maps.set('(', 1)
   maps.set('[', 2)
