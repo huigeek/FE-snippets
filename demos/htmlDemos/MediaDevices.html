@@ -1,0 +1,44 @@
+<video id="video" src="" style="width:640px;height:480px;"></video>
+<button id="camera">开启摄像头</button>
+<button id="capture">拍照</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+
+<script>
+  const video = document.querySelector('#video')
+  const context = canvas.getContext('2d')
+  const camera = document.querySelector('#camera')
+  const capture = document.querySelector('#capture')
+
+  camera.addEventListener('click', openCamera)
+
+  capture.addEventListener('click', () => context.drawImage(video, 0, 0, 640, 480))
+
+  function openCamera () {
+    const constraints = {
+      video: true
+    }
+
+    if (navigator.mediaDevices.getUserMedia) {
+      const p = navigator.mediaDevices.getUserMedia(constraints)
+
+      p.then(stream => {
+        try {
+          video.srcObject = stream
+        }catch(error) {
+          video.src = window.URL.createObjectURL(stream)
+        }
+
+        video.onloadedmetadata = e => video.play()
+      }).catch(err => {
+        console.log(err)
+      })
+    } else if (navigator.mediaDevices.webkitGetUserMedia) {
+      const p = navigator.mediaDevices.webkitGetUserMedia(constraints)
+
+      p.then(stream => {
+        video.src = window.URL.createObjectURL(stream)
+        video.onloadedmetadata = e => video.play()
+      })
+    }
+  }
+</script>
