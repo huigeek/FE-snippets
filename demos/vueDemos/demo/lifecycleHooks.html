@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue的生命周期</title>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>{{message}}</h1>
+</div>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      message: 'vue的生命周期'
+    },
+    beforeCreate () {
+      // 此时组件的选项对象还未创建，$el和$data还未初始化
+      console.group('-------beforeCreate状态-------')
+      console.log('--el-->', this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    created () {
+      // 完成$data数据的初始化，还没有$el。
+      console.group('-------created状态-------')
+      console.log('--el-->', this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    beforeMount () {
+      // $data和$el都已经有了，但还没有挂载到html上，html上还是原始的字符串
+      console.group('-------beforeMount状态-------')
+      console.log('--el-->', this.$el)
+      console.log(this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    mounted () {
+      // 挂载完成，这时已经完成html替换
+      console.group('-------mounted状态-------')
+      console.log('--el-->', this.$el)
+      console.log(this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    beforeUpdate () {
+      // 在数据更新之前调用，在虚拟DOM重新渲染和打补丁之前。可以在该钩子中进一步更改状态，不会触发附加地重渲染过程
+      console.group('-------beforeUpdate状态-------')
+      console.log('--el-->', this.$el)
+      console.log(this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    updated () {
+      // 数据更改导致虚拟DOM重新渲染和打补丁，调用时，组件DOM已更新，可以在这里执行依赖DOM的操作。要避免在此钩子内更改状态
+      console.group('-------updated状态-------')
+      console.log('--el-->', this.$el)
+      console.log(this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    beforeDestroy () {
+      // 销毁前，实例仍然可用
+      // 在这个钩子里，清除组件的定时器和监听的DOM事件
+      console.group('-------beforeDestroy状态-------')
+      console.log('--el-->', this.$el)
+      console.log(this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    },
+    destroyed () {
+      // 实例销毁之后调用。所有的事件监听器被移除，所有子实例也被销毁。该钩子在服务器渲染期间不被调用。
+      console.group('-------destroyed状态-------')
+      console.log('--el-->', this.$el)
+      console.log(this.$el)
+      console.log('--data-->', this.$data)
+      console.log('--message-->', this.message)
+    }
+  })
+</script>
+</body>
+</html>
