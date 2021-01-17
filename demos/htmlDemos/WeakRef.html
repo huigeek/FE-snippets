@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #counter {
+      position: relative;
+      top: 100px;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      border: 1px solid purple;
+      text-align: center;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+<div id="counter"></div>
+<script>
+// 弱引用
+// js 用引用计数来进行垃圾回收。如果一个对象的引用次数为0，那么当垃圾回收时就会回收它。
+// 弱引用不会被计算在引用的次数内，这对于节省内存泄露非常有用。
+
+// 对一个元素进行弱引用，用的时候，判断它是否存在，存在执行对计数加一，不存在则停止定时器并将引用置为空。
+class Counter {
+  constructor(element) {
+    // Remember a weak reference to the DOM element
+    this.ref = new WeakRef(element);
+    this.start();
+  }
+
+  start() {
+    if (this.timer) {
+      return;
+    }
+
+    this.count = 0;
+
+    const tick = () => {
+      // Get the element from the weak reference, if it still exists
+      const element = this.ref.deref();
+      if (element) {
+        element.textContent = ++this.count;
+      } else {
+        // The element doesn't exist anymore
+        console.log("The element is gone.");
+        this.stop();
+        this.ref = null;
+      }
+    };
+
+    tick();
+    this.timer = setInterval(tick, 1000);
+  }
+
+  stop() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = 0;
+    }
+  }
+}
+
+const counter = new Counter(document.getElementById("counter"));
+counter.start();
+setTimeout(() => {
+  document.getElementById("counter").remove();
+}, 50000);
+</script>
+</body>
+</html>
