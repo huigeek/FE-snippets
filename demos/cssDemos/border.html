@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      position: relative;
+      margin: 20px auto;
+      width: 200px;
+      height: 80px;
+      border: 1px solid olivedrab;
+    }
+    div:before,
+    div:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 1px solid olivedrab;
+    }
+    div:before {
+      top: -5px;
+      left: -5px;
+      border-right: none;
+      border-bottom: none;
+    }
+    div:after {
+      right: -5px;
+      bottom: -5px;
+      border-top: none;
+      border-left: none;
+    }
+    div:hover:before,
+    div:hover:after {
+      width: calc(100% + 9px);
+      height: calc(100% + 9px);
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>
