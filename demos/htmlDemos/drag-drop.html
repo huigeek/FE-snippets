@@ -1,0 +1,44 @@
+<style>
+  main {
+    display: flex;
+    justify-content: space-between;
+  }
+  #left,
+  #right {
+    flex: 1 1 auto;
+    border: 1px solid olive;
+  }
+</style>
+
+<main>
+  <div id="left">
+    <div draggable="true" id="txt1">可移动文字一</div>
+    <div draggable="true" id="txt2">可移动文字二</div>
+    <div draggable="true" id="txt3">可移动文字三</div>
+    <div draggable="true" id="txt4">可移动文字四</div>
+    <div draggable="true" id="txt5">可移动文字五</div>
+  </div>
+  <div id="right"></div>
+</main>
+
+<script>
+  // 左右可互相拖放
+
+  let left = document.querySelector('#left')
+  let right = document.querySelector('#right')
+
+  left.addEventListener('dragstart', event => event.dataTransfer.setData('Text', event.target.id))
+  right.addEventListener('dragstart', event => event.dataTransfer.setData('Text', event.target.id))
+
+  left.addEventListener('dragover', event => event.preventDefault())
+  right.addEventListener('dragover', event => event.preventDefault())
+
+  left.addEventListener('drop', event => {
+    const drag_id = event.dataTransfer.getData('Text')
+    left.appendChild(document.querySelector(`#${drag_id}`))
+  })
+  right.addEventListener('drop', event => {
+    const drag_id = event.dataTransfer.getData('Text')
+    right.appendChild(document.querySelector(`#${drag_id}`))
+  })
+</script>
