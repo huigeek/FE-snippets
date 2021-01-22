@@ -20,6 +20,8 @@ var preorderTraversal = function(root) {
 
     result.push(temp.val)
 
+    // 栈的特性是后进先出，为了保证可以先访问左节点，再访问右节点
+    // 这里要先把右节点压入栈中，再把左节点压入栈中
     stack.push(temp.right)
     stack.push(temp.left)
   }
