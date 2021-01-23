@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    main {
+      display: inline-block;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <main></main>
+  <script>
+    // 平常项目里，一些小的图片在webpack里用file-loader或url-loader转成base64
+    // 如果我们拋开webpack，如何实现从图片地址到生成base64呢？
+
+    // 这里的demo, 注意受限于 CORS 策略，会存在跨域问题。开个本地服务器，打开没问题。
+    // 直接打开这个html，会报错“Uncaught DOMException: Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported.”
+    // 是因为使用canvas时，跨域会报安全错误，无法导出画布的内容（无法使用画布的toBlob(),toDataURL(),或getImageData()）
+    // 这其实是为了保护用户的隐私数据在没有允许下不能导出到远程站点
+    // https://stackoverflow.com/questions/20424279/canvas-todataurl-securityerror
+
+    // 图片转成base64
+    // 拿到图片，将图片绘制到画布上，然后用canvas的toDataURL方法
+    function imgToBase64(img) {
+      let result = ''
+      let canvas = document.createElement('canvas')
+      let {width, height} = img
+      canvas.width = width
+      canvas.height = height
+      let ctx = canvas.getContext('2d')
+      ctx.drawImage(img, 0, 0, width, height)
+      result = canvas.toDataURL()
+      return result
+    }
+
+    // 获取图片地址
+    function getBase64(url){
+      return new Promise((resolve, reject) => {
+        // url
+        let img = new Image()
+        img.onload = function(){
+          let imgBase64 = imgToBase64(img)
+          resolve(imgBase64)
+        }
+        img.onerror = function(){
+          reject('error')
+        }
+        console.log(url)
+        img.src = url
+      })
+    }
+
+    getBase64('./z-index.png').then(data => {
+      let el = document.querySelector('main')
+      el.innerText = data
+    })
+  </script>
+</body>
+</html>
