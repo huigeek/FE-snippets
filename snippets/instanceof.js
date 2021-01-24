@@ -38,3 +38,21 @@ const myInstanceOf = function (obj, cstor) { // (object, constructor)
 // console.log(myInstanceOf(tt, Car))
 // console.log(myInstanceOf(tt, Train))
 // console.log(myInstanceOf(tt, Object))
+
+// 实现instanceof
+// 如果在A的原型链上有B.prototype，则返回true，否则返回false
+// 原型链的本质是链表，只不过链表是用next指针，而原型链是用__proto__指针
+
+const instance_of = (A, B) => {
+  let cur = A.__proto__
+  while (cur) {
+    if (cur === B.prototype) return true
+    cur = cur.__proto__
+  }
+  return false
+}
+
+console.log(instance_of([], Array))
+console.log(instance_of({}, Object))
+console.log(instance_of([], Object))
+console.log(instance_of(1, Number))
